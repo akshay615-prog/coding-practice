@@ -1,6 +1,34 @@
 const taskForm = document.getElementById("taskForm");
 const taskList = document.getElementById("taskList");
 
+// Task counter elements
+const totalTasks = document.getElementById("totalTasks");
+const completedTasks = document.getElementById("completedTasks");
+const pendingTasks = document.getElementById("pendingTasks");
+
+// Function to update the task counter
+function updateTaskCounter() {
+    const allRows = taskList.querySelectorAll("tr");
+
+    let completedCount = 0;
+
+    allRows.forEach(function (row) {
+        const checkbox = row.querySelector("input[type='checkbox']");
+
+        if (checkbox.checked) {
+            completedCount++;
+        }
+    });
+
+    const totalCount = allRows.length;
+    const pendingCount = totalCount - completedCount;
+
+    totalTasks.textContent = totalCount;
+    completedTasks.textContent = completedCount;
+    pendingTasks.textContent = pendingCount;
+}
+
+// Add a new task
 taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -12,40 +40,45 @@ taskForm.addEventListener("submit", function (event) {
     // Create a new table row
     const newRow = document.createElement("tr");
 
-    // Create task name cell
+    // Task name cell
     const taskCell = document.createElement("td");
     taskCell.textContent = taskName;
 
-    // Create due date cell
+    // Due date cell
     const dateCell = document.createElement("td");
     dateCell.textContent = dueDate;
 
-    // Create priority cell
+    // Priority cell
     const priorityCell = document.createElement("td");
     priorityCell.textContent = priority;
 
-    // Create completed checkbox cell
+    // Completed checkbox cell
     const completedCell = document.createElement("td");
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
 
+    // Update counter when checkbox changes
+    checkbox.addEventListener("change", function () {
+        updateTaskCounter();
+    });
+
     completedCell.appendChild(checkbox);
 
-    // Create action cell
+    // Action cell
     const actionCell = document.createElement("td");
 
-    // Create delete button
+    // Delete button
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.textContent = "Delete";
 
-    // Delete task when button is clicked
+    // Delete task when clicked
     deleteButton.addEventListener("click", function () {
         newRow.remove();
+        updateTaskCounter();
     });
 
-    // Add delete button to action cell
     actionCell.appendChild(deleteButton);
 
     // Add all cells to the row
@@ -55,8 +88,11 @@ taskForm.addEventListener("submit", function (event) {
     newRow.appendChild(completedCell);
     newRow.appendChild(actionCell);
 
-    // Add the row to the table
+    // Add row to the table
     taskList.appendChild(newRow);
+
+    // Update counter after adding task
+    updateTaskCounter();
 
     // Clear the form
     taskForm.reset();
