@@ -1,0 +1,25 @@
+const taskForm = document.getElementById("taskForm");
+const taskList = document.getElementById("taskList");
+taskForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const taskName = document.getElementById("taskName").value.trim();
+    const dueDate = document.getElementById("dueDate").value;
+    const priority = document.getElementById("priority").value;
+    const newRow = document.createElement("tr");
+    const taskCell = document.createElement("td");
+    taskCell.textContent = taskName;
+    const dateCell = document.createElement("td");
+    dateCell.textContent = dueDate;
+    const priorityCell = document.createElement("td");
+    priorityCell.textContent = priority;
+    const completedCell = document.createElement("td");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    completedCell.appendChild(checkbox);
+    newRow.appendChild(taskCell);
+    newRow.appendChild(dateCell);
+    newRow.appendChild(priorityCell);
+    newRow.appendChild(completedCell);
+    taskList.appendChild(newRow);
+    taskForm.reset();
+});

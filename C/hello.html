@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday Pakhi 🌻💖</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            font-family:
+                "Trebuchet MS",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff3df,
+                    #ffd6df,
+                    #ffe8c8
+                );
+        }
+
+
+        /* =========================================
+           PAGES
+        ========================================= */
+
+        .page {
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #page2 {
+            display: none;
+            opacity: 0;
+        }
+
+        #page2.show {
+            display: block;
+
+            animation:
+                pageReveal
+                1s
+                ease
+                forwards;
+        }
+
+        @keyframes pageReveal {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(40px)
+                    scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* =========================================
+           SUNFLOWERS
+        ========================================= */
+
+        .sunflower {
+
+            position: fixed;
+
+            z-index: 2;
+
+            font-size: 75px;
+
+            pointer-events: none;
+
+            filter:
+                drop-shadow(
+                    0 8px 10px
+                    rgba(80, 50, 0, 0.18)
+                );
+
+            animation:
+                flowerFloat
+                4s
+                ease-in-out
+                infinite;
+        }
+
+        .flower1 {
+            top: 15px;
+            left: 20px;
+        }
+
+        .flower2 {
+            top: 15px;
+            right: 20px;
+            animation-delay: 1s;
+        }
+
+        .flower3 {
+            bottom: 20px;
+            left: 20px;
+            animation-delay: 1.5s;
+        }
+
+        .flower4 {
+            bottom: 20px;
+            right: 20px;
+            animation-delay: 2s;
+        }
+
+        .flower5 {
+            top: 45%;
+            left: -20px;
+            font-size: 55px;
+            animation-delay: 2.5s;
+        }
+
+        .flower6 {
+            top: 48%;
+            right: -20px;
+            font-size: 55px;
+            animation-delay: 1.3s;
+        }
+
+        @keyframes flowerFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(-4deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-12px)
+                    rotate(4deg);
+            }
+
+        }
+
+
+        /* =========================================
+           COLOURFUL PENCILS
+        ========================================= */
+
+        .pencils {
+
+            position: fixed;
+
+            z-index: 1;
+
+            display: flex;
+
+            gap: 7px;
+
+            pointer-events: none;
+        }
+
+        .pencils-left {
+
+            left: -5px;
+
+            bottom: 120px;
+
+            transform:
+                rotate(5deg);
+        }
+
+        .pencils-right {
+
+            right: -5px;
+
+            bottom: 120px;
+
+            transform:
+                rotate(-5deg);
+        }
+
+        .pencil {
+
+            width: 15px;
+
+            height: 150px;
+
+            border-radius:
+                5px 5px 2px 2px;
+
+            position: relative;
+
+            box-shadow:
+                2px 4px 8px
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .pencil::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -18px;
+
+            left: 0;
+
+            border-left:
+                7.5px solid transparent;
+
+            border-right:
+                7.5px solid transparent;
+
+            border-bottom:
+                20px solid #e8c99a;
+        }
+
+        .pencil::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: -18px;
+
+            left: 5px;
+
+            width: 5px;
+
+            height: 8px;
+
+            background: #333;
+
+            border-radius: 50%;
+        }
+
+        .red {
+            background: #ff4d6d;
+            transform: rotate(-8deg);
+        }
+
+        .yellow {
+            background: #ffd43b;
+            transform: rotate(4deg);
+        }
+
+        .green {
+            background: #51cf66;
+            transform: rotate(-3deg);
+        }
+
+        .blue {
+            background: #4dabf7;
+            transform: rotate(6deg);
+        }
+
+        .purple {
+            background: #b197fc;
+            transform: rotate(-6deg);
+        }
+
+        .pink {
+            background: #f783ac;
+            transform: rotate(3deg);
+        }
+
+
+        /* =========================================
+           FALLING CONFETTI
+        ========================================= */
+
+        .confetti {
+
+            position: fixed;
+
+            width: 10px;
+
+            height: 16px;
+
+            z-index: 0;
+
+            animation:
+                fall
+                7s
+                linear
+                infinite;
+        }
+
+        .cf1 {
+            left: 8%;
+            background: #ff4d6d;
+        }
+
+        .cf2 {
+            left: 22%;
+            background: #845ef7;
+            animation-delay: 1s;
+        }
+
+        .cf3 {
+            left: 42%;
+            background: #ffd43b;
+            animation-delay: 2s;
+        }
+
+        .cf4 {
+            left: 63%;
+            background: #339af0;
+            animation-delay: 3s;
+        }
+
+        .cf5 {
+            left: 84%;
+            background: #ff922b;
+            animation-delay: 1.5s;
+        }
+
+        .cf6 {
+            left: 94%;
+            background: #f06595;
+            animation-delay: 4s;
+        }
+
+        @keyframes fall {
+
+            from {
+                top: -30px;
+                transform: rotate(0);
+            }
+
+            to {
+                top: 110vh;
+                transform: rotate(720deg);
+            }
+
+        }
+
+
+        /* =========================================
+           TOP SECTION
+        ========================================= */
+
+        .top-section {
+
+            text-align: center;
+
+            padding-top: 35px;
+
+            position: relative;
+
+            z-index: 10;
+        }
+
+        .hey {
+
+            color: #d63384;
+
+            font-size: 24px;
+
+            font-weight: bold;
+        }
+
+        .day-title {
+
+            font-size:
+                clamp(
+                    38px,
+                    7vw,
+                    70px
+                );
+
+            font-weight: 900;
+
+            color: #6336a6;
+
+            text-shadow:
+                2px 3px #ffffff;
+        }
+
+
+        /* =========================================
+           MAIN CARD
+        ========================================= */
+
+        .birthday-card {
+
+            position: relative;
+
+            z-index: 10;
+
+            width:
+                min(
+                    760px,
+                    92%
+                );
+
+            margin:
+                20px auto 150px;
+
+            padding:
+                45px 40px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.94
+                );
+
+            border-radius: 35px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(
+                    120,
+                    60,
+                    80,
+                    0.25
+                );
+
+            backdrop-filter:
+                blur(8px);
+        }
+
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        .birthday-title {
+
+            text-align: center;
+
+            font-size:
+                clamp(
+                    38px,
+                    7vw,
+                    70px
+                );
+
+            font-weight: 900;
+
+            color: #e83e8c;
+
+            text-shadow:
+                3px 4px #ffd3e5;
+
+            animation:
+                pulse
+                2s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.035);
+            }
+
+        }
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        .main-message {
+
+            text-align: center;
+
+            font-size:
+                clamp(
+                    17px,
+                    2.5vw,
+                    21px
+                );
+
+            line-height: 1.8;
+
+            color: #44344f;
+        }
+
+        .pink {
+            color: #e83e8c;
+            font-weight: 800;
+        }
+
+        .purpleText {
+            color: #7950f2;
+            font-weight: 800;
+        }
+
+        .blueText {
+            color: #228be6;
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           WISH CARDS
+        ========================================= */
+
+        .wish-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .wish-card {
+
+            padding: 20px 10px;
+
+            border-radius: 22px;
+
+            text-align: center;
+
+            transition:
+                0.3s;
+        }
+
+        .wish-card:hover {
+
+            transform:
+                translateY(-8px)
+                rotate(2deg);
+        }
+
+        .wish-icon {
+            font-size: 35px;
+        }
+
+        .wish-title {
+
+            font-weight: 800;
+
+            margin-top: 7px;
+        }
+
+        .wish-small {
+
+            font-size: 13px;
+
+            margin-top: 4px;
+        }
+
+        .wish1 {
+            background: #ffe3ed;
+            color: #d63384;
+        }
+
+        .wish2 {
+            background: #fff3bf;
+            color: #e67700;
+        }
+
+        .wish3 {
+            background: #e5dbff;
+            color: #7048e8;
+        }
+
+        .wish4 {
+            background: #d0ebff;
+            color: #1971c2;
+        }
+
+
+        /* =========================================
+           SISTER MESSAGE
+        ========================================= */
+
+        .sister-message {
+
+            text-align: center;
+
+            margin-top: 35px;
+
+            color: #d63384;
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+        .sister-sub {
+
+            color: #7950f2;
+
+            font-size: 18px;
+
+            margin-top: 8px;
+        }
+
+
+        /* =========================================
+           PARTY
+        ========================================= */
+
+        .party-icons {
+
+            text-align: center;
+
+            font-size: 55px;
+
+            margin-top: 20px;
+
+            animation:
+                bounce
+                2s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-12px);
+            }
+
+        }
+
+
+        /* =========================================
+           QUOTE
+        ========================================= */
+
+        .quote {
+
+            margin-top: 25px;
+
+            padding: 25px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0f7,
+                    #f3e8ff
+                );
+
+            color: #754c78;
+
+            text-align: center;
+
+            font-style: italic;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================================
+           SURPRISE BUTTON
+        ========================================= */
+
+        #surpriseBtn {
+
+            position: fixed;
+
+            right: 40px;
+
+            bottom: 35px;
+
+            left: auto;
+
+            top: auto;
+
+            width: auto;
+
+            height: auto;
+
+            padding:
+                14px 26px;
+
+            margin: 0;
+
+            display: inline-block;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f72585,
+                    #c91875
+                );
+
+            color: white;
+
+            border: none;
+
+            border-radius: 15px;
+
+            font-size: 17px;
+
+            line-height: 1.2;
+
+            font-weight: bold;
+
+            font-family: inherit;
+
+            white-space: nowrap;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    201,
+                    24,
+                    117,
+                    0.35
+                );
+
+            z-index: 99999;
+
+            transition:
+                left 0.15s ease,
+                top 0.15s ease,
+                transform 0.15s ease;
+        }
+
+        #surpriseBtn:hover {
+
+            transform:
+                scale(1.05);
+        }
+
+
+        /* =========================================
+           PAGE 2
+        ========================================= */
+
+        .page2-container {
+
+            position: relative;
+
+            z-index: 10;
+
+            width:
+                min(
+                    1000px,
+                    94%
+                );
+
+            margin:
+                30px auto 100px;
+
+            text-align: center;
+        }
+
+        .page2-title {
+
+            font-size:
+                clamp(
+                    42px,
+                    7vw,
+                    75px
+                );
+
+            color: #e83e8c;
+
+            font-weight: 900;
+
+            text-shadow:
+                3px 4px #ffd1e3;
+        }
+
+        .heart-divider {
+
+            color: #d63384;
+
+            font-size: 30px;
+
+            letter-spacing: 10px;
+        }
+
+
+        /* =========================================
+           PHOTOS
+        ========================================= */
+
+        .photo-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 35px;
+
+            margin-top: 40px;
+        }
+
+        .photo-frame {
+
+            position: relative;
+
+            background: white;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(
+                    100,
+                    50,
+                    50,
+                    0.2
+                );
+
+            transform:
+                rotate(-2deg);
+
+            transition:
+                0.4s;
+        }
+
+        .photo-frame:nth-child(2) {
+
+            transform:
+                rotate(2deg);
+        }
+
+        .photo-frame:hover {
+
+            transform:
+                rotate(0)
+                scale(1.03);
+        }
+
+        .photo-frame img {
+
+            width: 100%;
+
+            height: 330px;
+
+            object-fit: cover;
+
+            border-radius: 4px;
+
+            display: block;
+        }
+
+        .tape {
+
+            position: absolute;
+
+            width: 100px;
+
+            height: 30px;
+
+            background:
+                rgba(
+                    255,
+                    220,
+                    150,
+                    0.75
+                );
+
+            top: -15px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                rotate(-3deg);
+
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           PERSONAL MESSAGE
+        ========================================= */
+
+        .personal-note {
+
+            margin:
+                45px auto;
+
+            max-width: 850px;
+
+            padding:
+                35px 30px;
+
+            background:
+                #fff8e8;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    100,
+                    70,
+                    30,
+                    0.15
+                );
+
+            color: #44302d;
+
+            font-size:
+                clamp(
+                    20px,
+                    3vw,
+                    30px
+                );
+
+            line-height: 1.8;
+
+            font-style: italic;
+        }
+
+
+        /* =========================================
+           FINAL MESSAGE
+        ========================================= */
+
+        .final-message {
+
+            color: #d63384;
+
+            font-size:
+                clamp(
+                    22px,
+                    4vw,
+                    34px
+                );
+
+            font-weight: bold;
+
+            margin-top: 35px;
+        }
+
+        .final-emojis {
+
+            font-size: 55px;
+
+            margin-top: 20px;
+
+            animation:
+                bounce
+                2s
+                infinite;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .birthday-card {
+
+                padding:
+                    30px 20px;
+            }
+
+            .wish-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+            .photo-grid {
+
+                grid-template-columns:
+                    1fr;
+
+                gap: 30px;
+            }
+
+            .photo-frame img {
+
+                height: 280px;
+            }
+
+            .sunflower {
+
+                font-size: 55px;
+            }
+
+            .pencils {
+
+                display: none;
+            }
+
+            #surpriseBtn {
+
+                right: 20px;
+
+                bottom: 20px;
+
+                font-size: 15px;
+
+                padding:
+                    13px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         PAGE 1
+    ================================================== -->
+
+    <section
+        id="page1"
+        class="page"
+    >
+
+
+        <!-- SUNFLOWERS -->
+
+        <div class="sunflower flower1">
+            🌻
+        </div>
+
+        <div class="sunflower flower2">
+            🌻
+        </div>
+
+        <div class="sunflower flower3">
+            🌻
+        </div>
+
+        <div class="sunflower flower4">
+            🌻
+        </div>
+
+        <div class="sunflower flower5">
+            🌻
+        </div>
+
+        <div class="sunflower flower6">
+            🌻
+        </div>
+
+
+        <!-- COLOURFUL PENCILS -->
+
+        <div class="pencils pencils-left">
+
+            <div class="pencil red"></div>
+            <div class="pencil yellow"></div>
+            <div class="pencil green"></div>
+            <div class="pencil blue"></div>
+            <div class="pencil purple"></div>
+
+        </div>
+
+
+        <div class="pencils pencils-right">
+
+            <div class="pencil pink"></div>
+            <div class="pencil blue"></div>
+            <div class="pencil yellow"></div>
+            <div class="pencil green"></div>
+            <div class="pencil purple"></div>
+
+        </div>
+
+
+        <!-- CONFETTI -->
+
+        <div class="confetti cf1"></div>
+        <div class="confetti cf2"></div>
+        <div class="confetti cf3"></div>
+        <div class="confetti cf4"></div>
+        <div class="confetti cf5"></div>
+        <div class="confetti cf6"></div>
+
+
+        <!-- TOP -->
+
+        <div class="top-section">
+
+            <div class="hey">
+                Hey Pakhi! 💖
+            </div>
+
+            <div class="day-title">
+                It's Your Day! 🎉
+            </div>
+
+            <div
+                style="
+                    color:#eab308;
+                    font-size:30px;
+                    margin-top:8px;
+                "
+            >
+                ─── ✨ ───
+            </div>
+
+        </div>
+
+
+        <!-- CARD -->
+
+        <main class="birthday-card">
+
+
+            <h1 class="birthday-title">
+
+                🎂 Happy Birthday Pakhi! 🎂
+
+            </h1>
+
+
+            <div
+                style="
+                    text-align:center;
+                    color:#ec4899;
+                    font-size:30px;
+                    margin:12px 0;
+                "
+            >
+
+                🌻 ── 💖 ── 🌻
+
+            </div>
+
+
+            <p class="main-message">
+
+                To my amazing little sister,
+
+                <span class="pink">
+                    Pakhi 💕
+                </span>
+
+                <br><br>
+
+                Wishing you a day filled with
+
+                <span class="pink">
+                    love, laughter
+                </span>
+
+                and everything that makes you
+
+                <span class="pink">
+                    smile.
+                </span>
+
+                ✨
+
+                <br>
+
+                May this year bring you
+
+                <span class="purpleText">
+                    happiness,
+                    success,
+                    good health
+                </span>
+
+                and loads of
+
+                <span class="blueText">
+                    beautiful memories!
+                </span>
+
+                🌻
+
+            </p>
+
+
+            <!-- WISH CARDS -->
+
+            <div class="wish-grid">
+
+
+                <div class="wish-card wish1">
+
+                    <div class="wish-icon">
+                        💗
+                    </div>
+
+                    <div class="wish-title">
+                        Stay Happy
+                    </div>
+
+                    <div class="wish-small">
+                        Always
+                    </div>
+
+                </div>
+
+
+                <div class="wish-card wish2">
+
+                    <div class="wish-icon">
+                        ⭐
+                    </div>
+
+                    <div class="wish-title">
+                        Dream Big
+                    </div>
+
+                    <div class="wish-small">
+                        Aim Higher
+                    </div>
+
+                </div>
+
+
+                <div class="wish-card wish3">
+
+                    <div class="wish-icon">
+                        ✨
+                    </div>
+
+                    <div class="wish-title">
+                        Shine Bright
+                    </div>
+
+                    <div class="wish-small">
+                        Every Day
+                    </div>
+
+                </div>
+
+
+                <div class="wish-card wish4">
+
+                    <div class="wish-icon">
+                        🎁
+                    </div>
+
+                    <div class="wish-title">
+                        Enjoy Life
+                    </div>
+
+                    <div class="wish-small">
+                        To The Fullest
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SISTER MESSAGE -->
+
+            <div class="sister-message">
+
+                💕 You're not just my sister...
+
+                <div class="sister-sub">
+
+                    You're my little bundle
+                    of chaos & happiness! 😂💖
+
+                </div>
+
+            </div>
+
+
+            <!-- PARTY -->
+
+            <div class="party-icons">
+
+                🎉 🎈 🎁 🥳
+
+            </div>
+
+
+            <!-- QUOTE -->
+
+            <div class="quote">
+
+                🌻
+
+                "Count your life by smiles,
+                not tears.
+                Count your age by friends,
+                not years."
+
+                🌻
+
+            </div>
+
+
+        </main>
+
+
+        <!-- ==========================================
+             SURPRISE BUTTON
+        =========================================== -->
+
+        <button
+            id="surpriseBtn"
+            type="button"
+        >
+
+            Click for a Surprise 🎊
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PAGE 2
+    ================================================== -->
+
+    <section
+        id="page2"
+        class="page"
+    >
+
+
+        <!-- SUNFLOWERS -->
+
+        <div class="sunflower flower1">
+            🌻
+        </div>
+
+        <div class="sunflower flower2">
+            🌻
+        </div>
+
+        <div class="sunflower flower3">
+            🌻
+        </div>
+
+        <div class="sunflower flower4">
+            🌻
+        </div>
+
+
+        <!-- PENCILS -->
+
+        <div class="pencils pencils-left">
+
+            <div class="pencil red"></div>
+            <div class="pencil yellow"></div>
+            <div class="pencil green"></div>
+            <div class="pencil blue"></div>
+            <div class="pencil purple"></div>
+
+        </div>
+
+
+        <div class="pencils pencils-right">
+
+            <div class="pencil pink"></div>
+            <div class="pencil blue"></div>
+            <div class="pencil yellow"></div>
+            <div class="pencil green"></div>
+            <div class="pencil purple"></div>
+
+        </div>
+
+
+        <!-- PAGE 2 -->
+
+        <div class="page2-container">
+
+
+            <div style="font-size:40px">
+
+                🌻🎀🌻
+
+            </div>
+
+
+            <h1 class="page2-title">
+
+                Happy Birthday Pakhi 💖
+
+            </h1>
+
+
+            <div class="heart-divider">
+
+                ── ♥ ──
+
+            </div>
+
+
+            <p
+                style="
+                    font-size:20px;
+                    color:#7c3aed;
+                    font-weight:600;
+                "
+            >
+
+                A little something from
+                your annoying brother 😂💕
+
+            </p>
+
+
+            <!-- =========================================
+                 TWO PHOTOS
+            ========================================= -->
+
+            <div class="photo-grid">
+
+
+                <!-- NEW PHOTO -->
+
+                <div class="photo-frame">
+
+                    <div class="tape"></div>
+
+                    <img
+                        src="pakhi-new.jpg"
+                        alt="Pakhi birthday memory"
+                    >
+
+                </div>
+
+
+                <!-- OLD PHOTO -->
+
+                <div class="photo-frame">
+
+                    <div class="tape"></div>
+
+                    <img
+                        src="pakhi-photo-2.jpg"
+                        alt="Pakhi birthday memory"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PERSONAL MESSAGE -->
+
+            <div class="personal-note">
+
+                jab milenge fir kuch gift
+                de denge
+
+                <br>
+
+                abhi to yahi hai isi se
+                kaam chala le.
+
+                <br>
+
+                meri pyari behn😘
+
+            </div>
+
+
+            <!-- FINAL MESSAGE -->
+
+            <div class="final-message">
+
+                🌻 Keep smiling, Pakhi! 🌻
+
+                <br>
+
+                You're loved more than
+                you know. 💖
+
+            </div>
+
+
+            <div class="final-emojis">
+
+                🎂 🎉 🌻 🎈 💕 🎁
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+
+        /* ==========================================
+           BUTTON
+        ========================================== */
+
+        const button =
+            document.getElementById(
+                "surpriseBtn"
+            );
+
+
+        /*
+            Number of times
+            button has moved.
+        */
+
+        let moveCount = 0;
+
+
+        /*
+            EXACTLY 27 MOVES.
+        */
+
+        const maxMoves = 27;
+
+
+        /*
+            Prevent opening twice.
+        */
+
+        let opened = false;
+
+
+        /* ==========================================
+           MOVE BUTTON
+        ========================================== */
+
+        function moveButton() {
+
+
+            /*
+                Stop after 27.
+            */
+
+            if (
+                moveCount >= maxMoves
+            ) {
+
+                return;
+
+            }
+
+
+            moveCount++;
+
+
+            /*
+                Get actual button size.
+            */
+
+            const buttonWidth =
+                button.offsetWidth;
+
+            const buttonHeight =
+                button.offsetHeight;
+
+
+            /*
+                Screen margins.
+            */
+
+            const margin = 15;
+
+
+            /*
+                Available area.
+            */
+
+            const maxX =
+                window.innerWidth -
+                buttonWidth -
+                margin;
+
+
+            const maxY =
+                window.innerHeight -
+                buttonHeight -
+                margin;
+
+
+            /*
+                Random X.
+            */
+
+            const randomX =
+                Math.floor(
+                    Math.random() *
+                    Math.max(
+                        1,
+                        maxX - margin
+                    )
+                    + margin
+                );
+
+
+            /*
+                Random Y.
+            */
+
+            const randomY =
+                Math.floor(
+                    Math.random() *
+                    Math.max(
+                        1,
+                        maxY - margin
+                    )
+                    + margin
+                );
+
+
+            /*
+                ONLY CHANGE POSITION.
+
+                Size stays exactly the same.
+            */
+
+            button.style.left =
+                randomX + "px";
+
+            button.style.top =
+                randomY + "px";
+
+            button.style.right =
+                "auto";
+
+            button.style.bottom =
+                "auto";
+
+
+            /*
+                AFTER 27 MOVES
+            */
+
+            if (
+                moveCount === maxMoves
+            ) {
+
+                button.textContent =
+                    "😂ook pakhi you win from your annoying brother😘";
+
+            }
+
+        }
+
+
+        /* ==========================================
+           DESKTOP
+        ========================================== */
+
+        button.addEventListener(
+            "mouseenter",
+            function () {
+
+                if (
+                    moveCount <
+                    maxMoves
+                ) {
+
+                    moveButton();
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        button.addEventListener(
+            "touchstart",
+            function (event) {
+
+                if (
+                    moveCount <
+                    maxMoves
+                ) {
+
+                    event.preventDefault();
+
+                    moveButton();
+
+                }
+
+            },
+            {
+                passive: false
+            }
+        );
+
+
+        /* ==========================================
+           CLICK
+        ========================================== */
+
+        button.addEventListener(
+            "click",
+            openSurprise
+        );
+
+
+        /* ==========================================
+           OPEN SECOND PAGE
+        ========================================== */
+
+        function openSurprise() {
+
+
+            /*
+                Don't open before
+                27 movements.
+            */
+
+            if (
+                moveCount <
+                maxMoves
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+                Prevent duplicate opening.
+            */
+
+            if (opened) {
+
+                return;
+
+            }
+
+            opened = true;
+
+
+            /* ======================================
+               CONFETTI
+            ====================================== */
+
+            confetti({
+
+                particleCount: 300,
+
+                spread: 120,
+
+                startVelocity: 55,
+
+                origin: {
+                    y: 0.6
+                }
+
+            });
+
+
+            setTimeout(
+                function () {
+
+                    confetti({
+
+                        particleCount: 150,
+
+                        spread: 130,
+
+                        origin: {
+                            x: 0.1,
+                            y: 0.6
+                        }
+
+                    });
+
+
+                    confetti({
+
+                        particleCount: 150,
+
+                        spread: 130,
+
+                        origin: {
+                            x: 0.9,
+                            y: 0.6
+                        }
+
+                    });
+
+                },
+                300
+            );
+
+
+            /* ======================================
+               PAGE TRANSITION
+            ====================================== */
+
+            const page1 =
+                document.getElementById(
+                    "page1"
+                );
+
+
+            page1.style.transition =
+                "opacity .8s ease, transform .8s ease";
+
+
+            page1.style.opacity =
+                "0";
+
+
+            page1.style.transform =
+                "scale(.95)";
+
+
+            setTimeout(
+                function () {
+
+
+                    page1.style.display =
+                        "none";
+
+
+                    const page2 =
+                        document.getElementById(
+                            "page2"
+                        );
+
+
+                    page2.classList.add(
+                        "show"
+                    );
+
+
+                    window.scrollTo(
+                        0,
+                        0
+                    );
+
+
+                    /* ==================================
+                       SECOND CONFETTI
+                    ================================== */
+
+                    setTimeout(
+                        function () {
+
+                            confetti({
+
+                                particleCount: 250,
+
+                                spread: 160,
+
+                                startVelocity: 45,
+
+                                origin: {
+                                    x: 0.5,
+                                    y: 0.3
+                                }
+
+                            });
+
+                        },
+                        600
+                    );
+
+
+                },
+                800
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My smart to do Lists</title>
+    </head>
+    <body>
+       <header>
+        <h1>My smart to do Lists</h1>
+        <p>Manage your daily tasks efficiently.</p>
+
+       </header>
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+    Visit GitHub
+</a>
+       <br><br>
+       <img src="https://imgs.search.brave.com/9ojFCkHLguWXMzN_kQdXwoOxz_fyM_mcTpJEkPLLWvE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjAz/MjcwOTgzOS9waG90/by9sb25kb24tZW5n/bGFuZC1hLXBob3Rv/LWlsbHVzdHJhdGlv/bi1zaG93cy1hLWxh/cHRvcC1zY3JlZW4t/ZGlzcGxheXMtd2Vs/Y29tZS1zY3JlZW5z/LWFuZC5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9T2dxaHdw/UTJZWlZ1T0Y0WmxU/TEpQQnVRUHFTWVVm/eHN3aWdNOWZ1UWgt/bz0" 
+       alt="Visit Github" 
+       width="100" height="100">
+       <main>
+        <section>
+            <h2>Add task</h2>
+            <form id="taskForm">
+                <label for="taskName">Task name:</label>
+                <input type="text" id="taskName" name="taskName" required>
+                <label for="dueDate">Due date:</label>
+                <input type="date" id="dueDate" name="dueDate" required>
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+        <section>
+            <h2>Task List</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Task Name</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Completed</th>
+        </tr>
+    </thead>
+    <tbody id="taskList">
+    </tbody>
+</table>
+        </section>
+       </main>
+        <footer>
+            <p>My Smart to do app</p>
+        </footer> 
+        <script src="script.js"></script>
+    </body>
+</html>
