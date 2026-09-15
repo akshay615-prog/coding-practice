@@ -8,14 +8,7 @@
     <body>
        <header>
         <h1>My smart to do Lists</h1>
-        <p>Manage your daily tasks efficiently.</p>
-        <tr>
-            <th>Task Name</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Completed</th>
-            <th>Actions</th>
-        </tr>
+        <p>Manage your daily tasks efficiently.</p>th>
        </header>
       <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
     Visit GitHub
@@ -42,7 +35,7 @@
             </form>
         </section>
         <section>
-            <h2>Task List</h2>
+            <h3>Task List</h3>
 <table border="1">
     <thead>
         <tr>
@@ -50,6 +43,7 @@
             <th>Due Date</th>
             <th>Priority</th>
             <th>Completed</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody id="taskList">
@@ -57,10 +51,14 @@
 </table>
         </section>
         <section>
-            <h3>Task Counter</h3>
+            <h4>Task Counter</h4>
             <p>Total tasks: <span id="totalTasks">0</span></p>
             <p>Completed tasks: <span id="completedTasks">0</span></p>
             <p>Pending tasks: <span id="pendingTasks">0</span></p>
+        </section>
+        <section>
+            <h5>Search Tasks</h5>
+            <input type="text" id="searchTasks" placeholder="Search tasks...">
         </section>
        </main>
         <footer>
