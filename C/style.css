@@ -1,80 +1,369 @@
 
-/* ============================= */
-/* TASK COUNTER CARDS */
-/* ============================= */
+/* =====================================
+   SMART TODO APP - MODERN UI
+===================================== */
 
-.task-counter {
-    margin: 40px auto;
-    max-width: 1100px;
+/* ---------- RESET ---------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.task-counter h2 {
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #f8f7ff;
+    min-height: 100vh;
+    padding: 30px;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.18), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(236, 72, 153, 0.12), transparent 30%),
+        #080612;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+
+main {
+    max-width: 1150px;
+    margin: 30px auto;
+}
+
+section {
+    background: rgba(20, 14, 39, 0.9);
+    border: 1px solid #30224d;
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+label {
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 22px;
     color: #ffffff;
-    font-size: 28px;
-    margin-bottom: 25px;
+}
+
+h5 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #e9d5ff;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    max-width: 1150px;
+    margin: 0 auto 25px;
+    padding: 38px 30px;
+    text-align: center;
+    border: 1px solid #4c2878;
+    border-radius: 24px;
+    background:
+        linear-gradient(135deg, rgba(39, 20, 73, 0.95), rgba(18, 10, 36, 0.95));
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.15);
+}
+
+header h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 750;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #f0abfc, #c084fc, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #b8a9d3;
+    font-size: 16px;
+}
+
+/* ---------- GITHUB LINK ---------- */
+
+a {
+    color: #e879f9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #f5d0fe;
+}
+
+/* ---------- IMAGE ---------- */
+
+img {
+    display: block;
+    margin: 18px 0 28px;
+    border-radius: 14px;
+    max-width: 100%;
+}
+
+/* ---------- TASK FORM ---------- */
+
+#taskForm {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr auto;
+    gap: 14px;
+    align-items: end;
+}
+
+#taskForm label {
+    display: block;
+    color: #c4b5fd;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+#taskForm input,
+#taskForm select {
+    width: 100%;
+}
+
+/* ---------- INPUTS ---------- */
+
+input,
+select {
+    background: #171027;
+    color: #f8f7ff;
+    border: 1px solid #453263;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+input::placeholder {
+    color: #83749f;
+}
+
+input:focus,
+select:focus {
+    border-color: #d946ef;
+    box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.12);
+}
+
+/* ---------- BUTTONS ---------- */
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    color: white;
+    background: linear-gradient(135deg, #d946ef, #7c3aed);
+    font-weight: 650;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(217, 70, 239, 0.3);
+}
+
+/* ---------- TABLE ---------- */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid #392753;
+    border-radius: 15px;
+    background: #110b20;
+}
+
+th {
+    padding: 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: #f5d0fe;
+    background: linear-gradient(135deg, #342052, #482267);
+}
+
+td {
+    padding: 15px;
+    font-size: 14px;
+    color: #ddd6fe;
+    background: #150e25;
+    border-bottom: 1px solid #2c2040;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #211333;
+}
+
+/* ---------- CHECKBOX ---------- */
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #d946ef;
+    cursor: pointer;
+}
+
+/* ---------- DELETE BUTTON ---------- */
+
+td button {
+    padding: 8px 13px;
+    font-size: 12px;
+    background: linear-gradient(135deg, #e11d48, #9f1239);
+}
+
+td button:hover {
+    background: linear-gradient(135deg, #fb7185, #e11d48);
+}
+
+/* ---------- TASK OVERVIEW ---------- */
+
+.task-counter h2 {
+    text-align: left;
+    margin-bottom: 22px;
 }
 
 .counter-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
 }
 
 .counter-card {
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    min-height: 170px;
+    padding: 24px;
     border-radius: 18px;
-    background: linear-gradient(
-        145deg,
-        #211735,
-        #120d22
-    );
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease,
-                box-shadow 0.3s ease;
+    background: linear-gradient(145deg, #1d1233, #110b20);
+    border: 1px solid #38254f;
+    transition: 0.3s ease;
 }
 
 .counter-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(190, 40, 255, 0.25);
+    border-color: #8b5cf6;
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.15);
 }
 
 .counter-card h3 {
-    color: #c8bfd9;
-    font-size: 16px;
-    margin-bottom: 15px;
+    font-size: 15px;
+    color: #d8c9ed;
+    margin-bottom: 18px;
 }
 
 .counter-card p {
-    color: #ffffff;
-    font-size: 38px;
-    font-weight: bold;
-    margin: 0 0 10px;
+    font-size: 42px;
+    font-weight: 750;
+    margin-bottom: 10px;
 }
 
 .counter-card span {
-    color: #9f93b5;
-    font-size: 14px;
+    font-size: 13px;
+    color: #9585ad;
 }
-
-/* CARD ACCENT COLORS */
 
 .total-card {
     border-top: 3px solid #a855f7;
+}
+
+.total-card p {
+    color: #c084fc;
 }
 
 .completed-card {
     border-top: 3px solid #22c55e;
 }
 
-.pending-card {
-    border-top: 3px solid #ec4899;
+.completed-card p {
+    color: #4ade80;
 }
 
-/* RESPONSIVE DESIGN */
+.pending-card {
+    border-top: 3px solid #f59e0b;
+}
 
-@media (max-width: 768px) {
+.pending-card p {
+    color: #fbbf24;
+}
+
+/* ---------- SEARCH AND FILTER ---------- */
+
+#searchTask {
+    width: 100%;
+    max-width: 430px;
+    margin-top: 10px;
+}
+
+#filterPriority {
+    min-width: 180px;
+    margin-top: 10px;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+    max-width: 1150px;
+    margin: 25px auto 0;
+    padding: 25px;
+    text-align: center;
+    color: #817395;
+    font-size: 13px;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+
+@media (max-width: 850px) {
+
+    body {
+        padding: 15px;
+    }
+
+    #taskForm {
+        grid-template-columns: 1fr 1fr;
+    }
+
     .counter-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+
+    header {
+        padding: 28px 18px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    #taskForm {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .counter-card p {
+        font-size: 36px;
     }
 }
