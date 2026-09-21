@@ -105,7 +105,12 @@ taskForm.addEventListener("submit", function (event) {
 
     // Priority cell
     const priorityCell = document.createElement("td");
-    priorityCell.textContent = priority;
+
+    const priorityBadge = document.createElement("span");
+    priorityBadge.textContent = priority;
+    priorityBadge.classList.add("priority-badge", `priority-${priority}`);
+
+priorityCell.appendChild(priorityBadge);
 
     // Completed cell
     const completedCell = document.createElement("td");
@@ -117,8 +122,10 @@ taskForm.addEventListener("submit", function (event) {
 
     // Update counter when checkbox changes
     checkbox.addEventListener("change", function () {
-        updateTaskCounter();
-    });
+    newRow.classList.toggle("completed-task", checkbox.checked);
+
+    updateTaskCounter();
+});
 
     // Actions cell
     const actionCell = document.createElement("td");
