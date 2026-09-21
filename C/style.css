@@ -485,3 +485,32 @@ tbody input[type="checkbox"] {
     background: rgba(236, 72, 153, 0.15);
     border-color: rgba(236, 72, 153, 0.4);
 }
+
+/* =========================================
+   DATE INPUT DESIGN
+========================================= */
+
+input[type="date"] {
+    color-scheme: dark;
+    min-height: 20px;
+}
+
+/* Date text styling */
+input[type="date"] {
+    letter-spacing: 0.5px;
+}
+
+/* Prevent the date input from looking too small */
+input[type="date"]::-webkit-datetime-edit {
+    color: #ffffff;
+}
+
+input[type="date"]::-webkit-datetime-edit-text {
+    color: #a78bfa;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #ffffff;
+}
