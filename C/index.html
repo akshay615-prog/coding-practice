@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My smart to do Lists</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
        <header>
@@ -50,12 +51,32 @@
     </tbody>
 </table>
         </section>
-        <section>
-            <h4>Task Counter</h4>
-            <p>Total tasks: <span id="totalTasks">0</span></p>
-            <p>Completed tasks: <span id="completedTasks">0</span></p>
-            <p>Pending tasks: <span id="pendingTasks">0</span></p>
-        </section>
+        <section class="task-counter">
+    <h2>Task Overview</h2>
+
+    <div class="counter-grid">
+
+        <div class="counter-card total-card">
+            <h3>Total Tasks</h3>
+            <p id="totalTasks">0</p>
+            <span>All your tasks</span>
+        </div>
+
+        <div class="counter-card completed-card">
+            <h3>Completed</h3>
+            <p id="completedTasks">0</p>
+            <span>Tasks finished</span>
+        </div>
+
+        <div class="counter-card pending-card">
+            <h3>Pending</h3>
+            <p id="pendingTasks">0</p>
+            <span>Tasks remaining</span>
+        </div>
+
+    </div>
+</section>
+      
         <section>
             <h5>Search Tasks</h5>
             <input type="text" 
@@ -63,7 +84,7 @@
             placeholder="Search tasks...">
             <h5>Filter Tasks</h5>
             <select id="filterPriority">
-                <option value="all">All</option>
+                <option value="all">All Priorities</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
