@@ -9,7 +9,7 @@
     <body>
        <header>
         <h1>My smart to do Lists</h1>
-        <p>Manage your daily tasks efficiently.</p>th>
+        <p>Manage your daily tasks efficiently.</p>
        </header>
       <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
     Visit GitHub
@@ -35,22 +35,55 @@
                 <button type="submit">Add Task</button>
             </form>
         </section>
-        <section>
-            <h3>Task List</h3>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Task Name</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Completed</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody id="taskList">
-    </tbody>
-</table>
-        </section>
+       <section class="task-list-section">
+
+    <h3>Task List</h3>
+
+    <!-- Search and Filter Toolbar -->
+    <div class="task-toolbar">
+
+        <div class="search-box">
+            <label for="searchTask">Search Tasks</label>
+
+            <input
+                type="text"
+                id="searchTask"
+                placeholder="Search tasks..."
+            >
+        </div>
+
+        <div class="filter-box">
+            <label for="filterPriority">Priority</label>
+
+            <select id="filterPriority">
+                <option value="all">All Priorities</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!-- Task Table -->
+    <table>
+
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="taskList">
+        </tbody>
+
+    </table>
+
+</section>
         <section class="task-counter">
     <h2>Task Overview</h2>
 
