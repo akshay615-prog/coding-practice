@@ -1,3 +1,4 @@
+
 const taskForm = document.getElementById("taskForm");
 const taskList = document.getElementById("taskList");
 
@@ -6,13 +7,14 @@ const totalTasks = document.getElementById("totalTasks");
 const completedTasks = document.getElementById("completedTasks");
 const pendingTasks = document.getElementById("pendingTasks");
 
-// Search element
+// Search and filter elements
 const searchTask = document.getElementById("searchTask");
+const filterPriority = document.getElementById("filterPriority");
 
 
-// ===============================
+// =================================
 // TASK COUNTER
-// ===============================
+// =================================
 
 function updateTaskCounter() {
     const allRows = taskList.querySelectorAll("tr");
@@ -20,9 +22,9 @@ function updateTaskCounter() {
     let completedCount = 0;
 
     allRows.forEach(function (row) {
-        const checkbox = row.querySelector("input[type='checkbox']");
+        const checkbox = row.querySelector('input[type="checkbox"]');
 
-        if (checkbox.checked) {
+        if (checkbox && checkbox.checked) {
             completedCount++;
         }
     });
@@ -36,22 +38,27 @@ function updateTaskCounter() {
 }
 
 
-// ===============================
-// SEARCH TASKS
-// ===============================
+// =================================
+// SEARCH + PRIORITY FILTER
+// =================================
 
-function searchTasks() {
-    const searchText = searchTask.value.toLowerCase();
+function filterTasks() {
+    const searchText = searchTask.value.toLowerCase().trim();
+    const selectedPriority = filterPriority.value;
 
     const allRows = taskList.querySelectorAll("tr");
 
     allRows.forEach(function (row) {
-        const taskName = row
-            .querySelector("td")
-            .textContent
-            .toLowerCase();
+        const taskName = row.cells[0].textContent.toLowerCase();
+        const taskPriority = row.cells[2].textContent.toLowerCase();
 
-        if (taskName.includes(searchText)) {
+        const matchesSearch = taskName.includes(searchText);
+
+        const matchesPriority =
+            selectedPriority === "all" ||
+            taskPriority === selectedPriority;
+
+        if (matchesSearch && matchesPriority) {
             row.style.display = "";
         } else {
             row.style.display = "none";
@@ -60,71 +67,75 @@ function searchTasks() {
 }
 
 
-// Run search whenever the user types
-searchTask.addEventListener("input", function () {
-    searchTasks();
-});
+// Search when typing
+searchTask.addEventListener("input", filterTasks);
+
+// Filter when priority changes
+filterPriority.addEventListener("change", filterTasks);
 
 
-// ===============================
+// =================================
 // ADD TASK
-// ===============================
+// =================================
 
 taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Get values from the form
+    // Get form values
     const taskName = document.getElementById("taskName").value.trim();
     const dueDate = document.getElementById("dueDate").value;
     const priority = document.getElementById("priority").value;
 
-    // Create new table row
+    // Prevent empty task names
+    if (taskName === "") {
+        alert("Please enter a task name.");
+        return;
+    }
+
+    // Create a new table row
     const newRow = document.createElement("tr");
 
-    // Task name
+    // Task name cell
     const taskCell = document.createElement("td");
     taskCell.textContent = taskName;
 
-    // Due date
+    // Due date cell
     const dateCell = document.createElement("td");
     dateCell.textContent = dueDate;
 
-    // Priority
+    // Priority cell
     const priorityCell = document.createElement("td");
     priorityCell.textContent = priority;
 
-    // Completed checkbox
+    // Completed cell
     const completedCell = document.createElement("td");
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
 
+    completedCell.appendChild(checkbox);
+
+    // Update counter when checkbox changes
     checkbox.addEventListener("change", function () {
         updateTaskCounter();
     });
 
-    completedCell.appendChild(checkbox);
-
-
-    // ===============================
-    // DELETE BUTTON
-    // ===============================
-
+    // Actions cell
     const actionCell = document.createElement("td");
 
     const deleteButton = document.createElement("button");
-
     deleteButton.type = "button";
     deleteButton.textContent = "Delete";
 
+    // Delete task
     deleteButton.addEventListener("click", function () {
         newRow.remove();
 
         updateTaskCounter();
+        filterTasks();
     });
 
     actionCell.appendChild(deleteButton);
-
 
     // Add all cells to the row
     newRow.appendChild(taskCell);
@@ -133,12 +144,15 @@ taskForm.addEventListener("submit", function (event) {
     newRow.appendChild(completedCell);
     newRow.appendChild(actionCell);
 
-    // Add row to table
+    // Add row to the table
     taskList.appendChild(newRow);
+
+    // Reset form
+    taskForm.reset();
 
     // Update counter
     updateTaskCounter();
 
-    // Clear form
-    taskForm.reset();
+    // Apply current search and priority filter
+    filterTasks();
 });
