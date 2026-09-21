@@ -450,6 +450,7 @@ tbody input[type="checkbox"] {
     cursor: pointer;
 }
 
+
 /* =================================
    PRIORITY BADGES
 ================================= */
@@ -465,25 +466,31 @@ tbody input[type="checkbox"] {
     border: 1px solid transparent;
 }
 
-/* Low priority */
+/* Low Priority - Neon Blue */
+
 .priority-low {
-    color: #b9d5ff;
-    background: rgba(59, 130, 246, 0.15);
-    border-color: rgba(96, 165, 250, 0.4);
+    color: #7dd3fc;
+    background: rgba(14, 165, 233, 0.18);
+    border-color: #0ea5e9;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
 }
 
-/* Medium priority */
+/* Medium Priority - Golden Orange */
+
 .priority-medium {
-    color: #ffd28a;
-    background: rgba(245, 158, 11, 0.15);
-    border-color: rgba(245, 158, 11, 0.4);
+    color: #fcd34d;
+    background: rgba(245, 158, 11, 0.18);
+    border-color: #f59e0b;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
 }
 
-/* High priority */
+/* High Priority - Neon Pink */
+
 .priority-high {
-    color: #ffb5d1;
-    background: rgba(236, 72, 153, 0.15);
-    border-color: rgba(236, 72, 153, 0.4);
+    color: #ff80ab;
+    background: rgba(236, 72, 153, 0.18);
+    border-color: #ec4899;
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.25);
 }
 
 /* =========================================
@@ -513,4 +520,52 @@ input[type="date"]::-webkit-datetime-edit-month-field,
 input[type="date"]::-webkit-datetime-edit-day-field,
 input[type="date"]::-webkit-datetime-edit-year-field {
     color: #ffffff;
+}
+
+/* =========================================
+   FIX INPUT BACKGROUND AND AUTOFILL
+========================================= */
+
+input[type="text"],
+input[type="date"],
+select {
+    background-color: #171027 !important;
+    color: #ffffff !important;
+}
+
+/* Prevent browser autofill from changing the background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #171027 inset !important;
+    box-shadow: 0 0 0 1000px #171027 inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+/* =========================================
+   CLEAN DATE INPUT
+========================================= */
+
+/* Hide the browser's placeholder format */
+input[type="date"]:not(:focus):not(:valid) {
+    color: transparent !important;
+}
+
+/* Keep the calendar icon visible */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+/* Show the selected date */
+input[type="date"]:focus,
+input[type="date"]:valid {
+    color: #ffffff !important;
+}
+
+/* Keep the calendar icon visible when focused */
+input[type="date"]:focus::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
