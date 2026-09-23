@@ -11,25 +11,33 @@ const pendingTasks = document.getElementById("pendingTasks");
 const searchTask = document.getElementById("searchTask");
 const filterPriority = document.getElementById("filterPriority");
 
+// Local Storage Key
+const STORAGE_KEY = "smartTodoTasks";
+
+// Store tasks
+let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+
+// =================================
+// SAVE TASKS TO LOCAL STORAGE
+// =================================
+
+function saveTasks() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
 
 // =================================
 // TASK COUNTER
 // =================================
 
 function updateTaskCounter() {
-    const allRows = taskList.querySelectorAll("tr");
+    const totalCount = tasks.length;
 
-    let completedCount = 0;
+    const completedCount = tasks.filter(function (task) {
+        return task.completed;
+    }).length;
 
-    allRows.forEach(function (row) {
-        const checkbox = row.querySelector('input[type="checkbox"]');
-
-        if (checkbox && checkbox.checked) {
-            completedCount++;
-        }
-    });
-
-    const totalCount = allRows.length;
     const pendingCount = totalCount - completedCount;
 
     totalTasks.textContent = totalCount;
@@ -67,23 +75,114 @@ function filterTasks() {
 }
 
 
-// Search when typing
-searchTask.addEventListener("input", filterTasks);
+// =================================
+// RENDER ALL TASKS
+// =================================
 
-// Filter when priority changes
-filterPriority.addEventListener("change", filterTasks);
+function renderTasks() {
+    taskList.innerHTML = "";
+
+    tasks.forEach(function (task) {
+
+        // Create table row
+        const newRow = document.createElement("tr");
+
+        if (task.completed) {
+            newRow.classList.add("completed-task");
+        }
+
+        // Task name cell
+        const taskCell = document.createElement("td");
+        taskCell.textContent = task.name;
+
+        // Due date cell
+        const dateCell = document.createElement("td");
+        dateCell.textContent = task.dueDate;
+
+        // Priority cell
+        const priorityCell = document.createElement("td");
+
+        const priorityBadge = document.createElement("span");
+        priorityBadge.textContent = task.priority;
+
+        priorityBadge.classList.add(
+            "priority-badge",
+            `priority-${task.priority}`
+        );
+
+        priorityCell.appendChild(priorityBadge);
+
+        // Completed cell
+        const completedCell = document.createElement("td");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+
+        checkbox.addEventListener("change", function () {
+            task.completed = checkbox.checked;
+
+            newRow.classList.toggle(
+                "completed-task",
+                checkbox.checked
+            );
+
+            saveTasks();
+            updateTaskCounter();
+        });
+
+        completedCell.appendChild(checkbox);
+
+        // Actions cell
+        const actionCell = document.createElement("td");
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", function () {
+
+            tasks = tasks.filter(function (currentTask) {
+                return currentTask.id !== task.id;
+            });
+
+            saveTasks();
+            renderTasks();
+        });
+
+        actionCell.appendChild(deleteButton);
+
+        // Add cells to row
+        newRow.appendChild(taskCell);
+        newRow.appendChild(dateCell);
+        newRow.appendChild(priorityCell);
+        newRow.appendChild(completedCell);
+        newRow.appendChild(actionCell);
+
+        // Add row to table
+        taskList.appendChild(newRow);
+    });
+
+    updateTaskCounter();
+    filterTasks();
+}
 
 
 // =================================
-// ADD TASK
+// ADD NEW TASK
 // =================================
 
 taskForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     // Get form values
-    const taskName = document.getElementById("taskName").value.trim();
+    const taskName = document
+        .getElementById("taskName")
+        .value
+        .trim();
+
     const dueDate = document.getElementById("dueDate").value;
+
     const priority = document.getElementById("priority").value;
 
     // Prevent empty task names
@@ -92,89 +191,40 @@ taskForm.addEventListener("submit", function (event) {
         return;
     }
 
-    // Create a new table row
-    const newRow = document.createElement("tr");
+    // Create task object
+    const newTask = {
+        id: Date.now(),
+        name: taskName,
+        dueDate: dueDate,
+        priority: priority,
+        completed: false
+    };
 
-    // Task name cell
-    const taskCell = document.createElement("td");
-    taskCell.textContent = taskName;
+    // Add task to array
+    tasks.push(newTask);
 
-    // Due date cell
-    const dateCell = document.createElement("td");
-    dateCell.textContent = dueDate;
+    // Save tasks
+    saveTasks();
 
-    // Priority cell
-    const priorityCell = document.createElement("td");
-
-    const priorityBadge = document.createElement("span");
-    priorityBadge.textContent = priority;
-    priorityBadge.classList.add("priority-badge", `priority-${priority}`);
-
-priorityCell.appendChild(priorityBadge);
-
-    // Completed cell
-    const completedCell = document.createElement("td");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-
-    completedCell.appendChild(checkbox);
-
-    // Update counter when checkbox changes
-    checkbox.addEventListener("change", function () {
-    newRow.classList.toggle("completed-task", checkbox.checked);
-
-    updateTaskCounter();
-});
-
-    // Actions cell
-    const actionCell = document.createElement("td");
-
-    const deleteButton = document.createElement("button");
-    deleteButton.type = "button";
-    deleteButton.textContent = "Delete";
-
-    // Delete task
-    deleteButton.addEventListener("click", function () {
-        newRow.remove();
-
-        updateTaskCounter();
-        filterTasks();
-    });
-
-    actionCell.appendChild(deleteButton);
-
-    // Add all cells to the row
-    newRow.appendChild(taskCell);
-    newRow.appendChild(dateCell);
-    newRow.appendChild(priorityCell);
-    newRow.appendChild(completedCell);
-    newRow.appendChild(actionCell);
-
-    // Add row to the table
-    taskList.appendChild(newRow);
+    // Display updated tasks
+    renderTasks();
 
     // Reset form
     taskForm.reset();
-
-    // Update counter
-    updateTaskCounter();
-
-    // Apply current search and priority filter
-    filterTasks();
 });
+
+
 // =================================
-// THEME TOGGLE
+// SEARCH EVENTS
 // =================================
 
-const themeToggle = document.getElementById("themeToggle");
+searchTask.addEventListener("input", filterTasks);
 
-themeToggle.addEventListener("click", function () {
-    document.body.classList.toggle("light-mode");
+filterPriority.addEventListener("change", filterTasks);
 
-    if (document.body.classList.contains("light-mode")) {
-        themeToggle.textContent = "🌙 Dark Mode";
-    } else {
-        themeToggle.textContent = "☀️ Light Mode";
-    }
-});
+
+// =================================
+// LOAD TASKS WHEN PAGE OPENS
+// =================================
+
+renderTasks();
