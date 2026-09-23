@@ -14,12 +14,12 @@ const filterPriority = document.getElementById("filterPriority");
 // Local Storage Key
 const STORAGE_KEY = "smartTodoTasks";
 
-// Store tasks
+// Load tasks from Local Storage
 let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
 
 // =================================
-// SAVE TASKS TO LOCAL STORAGE
+// SAVE TASKS
 // =================================
 
 function saveTasks() {
@@ -28,10 +28,53 @@ function saveTasks() {
 
 
 // =================================
+// GET TODAY'S DATE
+// =================================
+
+function getTodayDate() {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
+
+// =================================
+// GET TASK STATUS
+// =================================
+
+function getTaskStatus(task) {
+
+    // Completed checkbox has priority
+    if (task.completed) {
+        return "Completed";
+    }
+
+    // No due date
+    if (!task.dueDate) {
+        return "Pending";
+    }
+
+    const today = getTodayDate();
+
+    // Due date has passed
+    if (task.dueDate < today) {
+        return "Overdue";
+    }
+
+    return "Pending";
+}
+
+
+// =================================
 // TASK COUNTER
 // =================================
 
 function updateTaskCounter() {
+
     const totalCount = tasks.length;
 
     const completedCount = tasks.filter(function (task) {
@@ -51,12 +94,14 @@ function updateTaskCounter() {
 // =================================
 
 function filterTasks() {
+
     const searchText = searchTask.value.toLowerCase().trim();
-    const selectedPriority = filterPriority.value;
+    const selectedPriority = filterPriority.value.toLowerCase();
 
     const allRows = taskList.querySelectorAll("tr");
 
     allRows.forEach(function (row) {
+
         const taskName = row.cells[0].textContent.toLowerCase();
         const taskPriority = row.cells[2].textContent.toLowerCase();
 
@@ -80,6 +125,7 @@ function filterTasks() {
 // =================================
 
 function renderTasks() {
+
     taskList.innerHTML = "";
 
     tasks.forEach(function (task) {
@@ -91,18 +137,30 @@ function renderTasks() {
             newRow.classList.add("completed-task");
         }
 
-        // Task name cell
+        // =================================
+        // TASK NAME CELL
+        // =================================
+
         const taskCell = document.createElement("td");
         taskCell.textContent = task.name;
 
-        // Due date cell
-        const dateCell = document.createElement("td");
-        dateCell.textContent = task.dueDate;
 
-        // Priority cell
+        // =================================
+        // DUE DATE CELL
+        // =================================
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = task.dueDate || "No date";
+
+
+        // =================================
+        // PRIORITY CELL
+        // =================================
+
         const priorityCell = document.createElement("td");
 
         const priorityBadge = document.createElement("span");
+
         priorityBadge.textContent = task.priority;
 
         priorityBadge.classList.add(
@@ -112,48 +170,94 @@ function renderTasks() {
 
         priorityCell.appendChild(priorityBadge);
 
-        // Completed cell
+
+        // =================================
+        // STATUS CELL
+        // =================================
+
+        const statusCell = document.createElement("td");
+
+        const statusBadge = document.createElement("span");
+
+        const status = getTaskStatus(task);
+
+        statusBadge.textContent = status;
+
+        statusBadge.classList.add("status-badge");
+
+        if (status === "Completed") {
+
+            statusBadge.classList.add("status-completed");
+
+        } else if (status === "Overdue") {
+
+            statusBadge.classList.add("status-overdue");
+
+        } else {
+
+            statusBadge.classList.add("status-pending");
+
+        }
+
+        statusCell.appendChild(statusBadge);
+
+
+        // =================================
+        // COMPLETED CELL
+        // =================================
+
         const completedCell = document.createElement("td");
 
         const checkbox = document.createElement("input");
+
         checkbox.type = "checkbox";
         checkbox.checked = task.completed;
 
         checkbox.addEventListener("change", function () {
+
             task.completed = checkbox.checked;
 
-            newRow.classList.toggle(
-                "completed-task",
-                checkbox.checked
-            );
-
-            updateStatus();
             saveTasks();
-            updateTaskCounter();
+
+            renderTasks();
+
         });
 
         completedCell.appendChild(checkbox);
 
-        // Actions cell
+
+        // =================================
+        // ACTIONS CELL
+        // =================================
+
         const actionCell = document.createElement("td");
 
         const deleteButton = document.createElement("button");
+
         deleteButton.type = "button";
         deleteButton.textContent = "Delete";
 
         deleteButton.addEventListener("click", function () {
 
             tasks = tasks.filter(function (currentTask) {
+
                 return currentTask.id !== task.id;
+
             });
 
             saveTasks();
+
             renderTasks();
+
         });
 
         actionCell.appendChild(deleteButton);
 
-        // Add cells to row
+
+        // =================================
+        // ADD CELLS TO ROW
+        // =================================
+
         newRow.appendChild(taskCell);
         newRow.appendChild(dateCell);
         newRow.appendChild(priorityCell);
@@ -163,10 +267,13 @@ function renderTasks() {
 
         // Add row to table
         taskList.appendChild(newRow);
+
     });
 
     updateTaskCounter();
+
     filterTasks();
+
 }
 
 
@@ -175,6 +282,7 @@ function renderTasks() {
 // =================================
 
 taskForm.addEventListener("submit", function (event) {
+
     event.preventDefault();
 
     // Get form values
@@ -183,36 +291,57 @@ taskForm.addEventListener("submit", function (event) {
         .value
         .trim();
 
-    const dueDate = document.getElementById("dueDate").value;
+    const dueDate = document
+        .getElementById("dueDate")
+        .value;
 
-    const priority = document.getElementById("priority").value;
+    const priority = document
+        .getElementById("priority")
+        .value
+        .toLowerCase();
+
 
     // Prevent empty task names
     if (taskName === "") {
+
         alert("Please enter a task name.");
+
         return;
+
     }
 
-    // Create task object
+
+    // Create new task object
     const newTask = {
+
         id: Date.now(),
+
         name: taskName,
+
         dueDate: dueDate,
+
         priority: priority,
+
         completed: false
+
     };
+
 
     // Add task to array
     tasks.push(newTask);
 
+
     // Save tasks
     saveTasks();
 
-    // Display updated tasks
+
+    // Render updated tasks
     renderTasks();
+
 
     // Reset form
     taskForm.reset();
+
 });
 
 
@@ -230,49 +359,3 @@ filterPriority.addEventListener("change", filterTasks);
 // =================================
 
 renderTasks();
-// Completed cell
-const completedCell = document.createElement("td");
-
-// Status cell
-const statusCell = document.createElement("td");
-
-const statusBadge = document.createElement("span");
-
-function getTaskStatus() {
-    if (task.completed) {
-        return "Completed";
-    }
-
-    if (!task.dueDate) {
-        return "Pending";
-    }
-
-    // Get today's date in YYYY-MM-DD format
-    const today = new Date().toISOString().split("T")[0];
-
-    if (task.dueDate < today) {
-        return "Overdue";
-    }
-
-    return "Pending";
-}
-
-function updateStatus() {
-    const status = getTaskStatus();
-
-    statusBadge.textContent = status;
-
-    statusBadge.className = "status-badge";
-
-    if (status === "Completed") {
-        statusBadge.classList.add("status-completed");
-    } else if (status === "Overdue") {
-        statusBadge.classList.add("status-overdue");
-    } else {
-        statusBadge.classList.add("status-pending");
-    }
-}
-
-updateStatus();
-
-statusCell.appendChild(statusBadge);
