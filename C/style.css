@@ -639,3 +639,269 @@ body.light-theme #themeToggle {
     color: #312e81;
     border-color: #c4b5fd;
 }
+/* ============================= */
+/* LIGHT MODE */
+/* ============================= */
+
+body.light-mode {
+    background: #f5f5f7;
+    color: #1f2937;
+}
+
+body.light-mode header h1,
+body.light-mode header p,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode label,
+body.light-mode a {
+    color: #1f2937;
+}
+
+body.light-mode section {
+    background: #ffffff;
+    border-color: #d1d5db;
+}
+
+body.light-mode input,
+body.light-mode select {
+    background: #ffffff;
+    color: #1f2937;
+    border-color: #cbd5e1;
+}
+
+body.light-mode table {
+    background: #ffffff;
+    color: #1f2937;
+}
+
+body.light-mode th {
+    background: #e5e7eb;
+    color: #1f2937;
+}
+
+body.light-mode td {
+    border-color: #d1d5db;
+}
+
+body.light-mode .counter-card {
+    background: #ffffff;
+    border-color: #d1d5db;
+}
+
+body.light-mode .task-toolbar label {
+    color: #1f2937;
+}
+/* ============================= */
+/* LIGHT MODE */
+/* ============================= */
+
+body.light-mode {
+    background: #f5f5f7;
+    color: #1f2937;
+}
+
+body.light-mode header h1,
+body.light-mode header p,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode label {
+    color: #1f2937;
+}
+
+body.light-mode section {
+    background: #ffffff;
+    border-color: #d1d5db;
+}
+
+body.light-mode input,
+body.light-mode select {
+    background: #ffffff;
+    color: #1f2937;
+    border-color: #cbd5e1;
+}
+
+body.light-mode table {
+    background: #ffffff;
+    color: #1f2937;
+}
+
+body.light-mode th {
+    background: #e5e7eb;
+    color: #1f2937;
+}
+
+body.light-mode td {
+    border-color: #d1d5db;
+}
+
+body.light-mode .counter-card {
+    background: #ffffff;
+    border-color: #d1d5db;
+}
+
+body.light-mode #themeToggle {
+    background: #1f2937;
+    color: #ffffff;
+}
+body.light-mode .github-card {
+    background: #ffffff;
+    border-color: #d1d5db;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .github-icon {
+    background: #f3f4f6;
+}
+
+body.light-mode .github-icon svg {
+    fill: #111827;
+}
+
+body.light-mode .github-content h3 {
+    color: #1f2937;
+}
+
+body.light-mode .github-content p {
+    color: #6b7280;
+}
+
+body.light-mode .github-content a {
+    color: #7c3aed;
+}
+
+body.light-mode .github-card:hover {
+    border-color: #8b5cf6;
+}
+
+/* ============================= */
+/* GITHUB CARD */
+/* ============================= */
+
+.github-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    max-width: 500px;
+    margin: 35px auto;
+    padding: 24px;
+
+    background: #151515;
+    border: 1px solid #303030;
+    border-radius: 18px;
+
+    transition: transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.github-card:hover {
+    transform: translateY(-5px);
+    border-color: #a78bfa;
+    box-shadow: 0 10px 30px rgba(167, 139, 250, 0.15);
+}
+
+.github-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 64px;
+    height: 64px;
+
+    background: #242424;
+    border-radius: 50%;
+}
+
+.github-icon svg {
+    width: 36px;
+    height: 36px;
+    fill: #ffffff;
+}
+
+.github-content h3 {
+    margin: 0 0 6px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.github-content p {
+    margin: 0 0 12px;
+    color: #a1a1aa;
+    font-size: 14px;
+}
+
+.github-content a {
+    color: #c4b5fd;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.github-content a:hover {
+    color: #ffffff;
+}
+/* =================================
+   DARK MODE FORM CONTROLS
+================================= */
+
+/* All input fields and dropdowns */
+input,
+select,
+textarea {
+    background-color: #10131c !important;
+    color: #f5f5f5 !important;
+    border: 1px solid #30384f;
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Input placeholder text */
+input::placeholder {
+    color: #8e99b5;
+}
+
+/* Focus effect */
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: #10131c !important;
+    color: #ffffff !important;
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.18);
+}
+
+/* Dropdown options */
+select option {
+    background-color: #10131c;
+    color: #ffffff;
+}
+
+/* Date input calendar icon */
+input[type="date"] {
+    color-scheme: dark;
+}
+
+/* Search input */
+#searchTask {
+    background-color: #10131c !important;
+    color: #ffffff !important;
+}
+
+/* Priority filter */
+#filterPriority {
+    background-color: #10131c !important;
+    color: #ffffff !important;
+}
+
+/* Prevent white background when autofill is used */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0 1000px #10131c inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
