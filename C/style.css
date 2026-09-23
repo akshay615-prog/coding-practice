@@ -905,3 +905,37 @@ input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 1000px #10131c inset;
     transition: background-color 5000s ease-in-out 0s;
 }
+/* Status badges */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Pending status */
+
+.status-pending {
+    color: #60a5fa;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+/* Completed status */
+
+.status-completed {
+    color: #4ade80;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+/* Overdue status */
+
+.status-overdue {
+    color: #f87171;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}

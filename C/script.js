@@ -127,6 +127,7 @@ function renderTasks() {
                 checkbox.checked
             );
 
+            updateStatus();
             saveTasks();
             updateTaskCounter();
         });
@@ -156,6 +157,7 @@ function renderTasks() {
         newRow.appendChild(taskCell);
         newRow.appendChild(dateCell);
         newRow.appendChild(priorityCell);
+        newRow.appendChild(statusCell);
         newRow.appendChild(completedCell);
         newRow.appendChild(actionCell);
 
@@ -228,3 +230,49 @@ filterPriority.addEventListener("change", filterTasks);
 // =================================
 
 renderTasks();
+// Completed cell
+const completedCell = document.createElement("td");
+
+// Status cell
+const statusCell = document.createElement("td");
+
+const statusBadge = document.createElement("span");
+
+function getTaskStatus() {
+    if (task.completed) {
+        return "Completed";
+    }
+
+    if (!task.dueDate) {
+        return "Pending";
+    }
+
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split("T")[0];
+
+    if (task.dueDate < today) {
+        return "Overdue";
+    }
+
+    return "Pending";
+}
+
+function updateStatus() {
+    const status = getTaskStatus();
+
+    statusBadge.textContent = status;
+
+    statusBadge.className = "status-badge";
+
+    if (status === "Completed") {
+        statusBadge.classList.add("status-completed");
+    } else if (status === "Overdue") {
+        statusBadge.classList.add("status-overdue");
+    } else {
+        statusBadge.classList.add("status-pending");
+    }
+}
+
+updateStatus();
+
+statusCell.appendChild(statusBadge);
