@@ -4,14 +4,13 @@
    SMART TODO APP
 ================================= */
 
-/* ---------- GLOBAL RESET ---------- */
+/* ---------- GLOBAL RESET ---------- */ 
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 :root {
     --bg-primary: #0f1117;
     --bg-secondary: #161923;
