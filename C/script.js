@@ -1,4 +1,3 @@
-
 const taskForm = document.getElementById("taskForm");
 const taskList = document.getElementById("taskList");
 
@@ -16,7 +15,6 @@ const STORAGE_KEY = "smartTodoTasks";
 
 // Load tasks from Local Storage
 let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
 
 // =================================
 // SAVE TASKS
