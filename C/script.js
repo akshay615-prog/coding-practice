@@ -16,18 +16,18 @@ const STORAGE_KEY = "smartTodoTasks";
 // Load tasks from Local Storage
 let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-// =================================
+// ===============================
 // SAVE TASKS
-// =================================
+// ===============================
 
 function saveTasks() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
 
-// =================================
+// ===============================
 // GET TODAY'S DATE
-// =================================
+// ===============================
 
 function getTodayDate() {
     const today = new Date();
