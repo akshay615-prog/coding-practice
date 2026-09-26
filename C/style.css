@@ -1,4 +1,4 @@
-/* =================================
+/* ==============================
    MINIMAL PREMIUM THEME
    SMART TODO APP
 ================================= */
@@ -34,7 +34,6 @@ body {
     line-height: 1.6;
     min-height: 100vh;
 }
-
 /* ---------- MAIN LAYOUT ---------- */
 
 main {
@@ -62,7 +61,6 @@ header {
     text-align: center;
     padding: 70px 20px 40px;
 }
-
 header h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
@@ -74,7 +72,6 @@ header p {
     color: var(--text-secondary);
     font-size: 1.05rem;
 }
-
 /* ---------- HEADINGS ---------- */
 
 h2,
@@ -83,31 +80,25 @@ h3 {
     font-weight: 650;
     letter-spacing: -0.4px;
 }
-
 h2 {
     font-size: 1.7rem;
 }
-
 h3 {
     font-size: 1.3rem;
 }
-
 /* ---------- GITHUB LINK ---------- */
 
 body > a {
     display: block;
     width: fit-content;
     margin: 0 auto 35px;
-
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 600;
-
     transition:
         color var(--transition),
         transform var(--transition);
 }
-
 body > a:hover {
     color: var(--accent);
     transform: translateY(-2px);
